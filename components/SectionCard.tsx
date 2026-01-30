@@ -81,28 +81,25 @@ const SectionCard: React.FC<SectionCardProps> = ({ section, onUpdate, onRemove, 
         </div>
       </div>
 
-      {/* Corpo: Número de Compassos */}
+      {/* Corpo: Número de Compassos (Somente setas conforme solicitado) */}
       <div className="flex-1 flex flex-col items-center justify-center relative py-1 bg-white">
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           <button 
             onClick={() => onUpdate({ measures: Math.max(1, section.measures - 1) })}
-            className="no-print opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-100 rounded-full text-slate-300 hover:text-slate-600 transition-all"
+            className="no-print p-1 hover:bg-slate-100 rounded-full text-slate-300 hover:text-blue-600 transition-all"
           >
-            <ChevronLeft size={14} />
+            <ChevronLeft size={18} />
           </button>
           
-          <input 
-            type="number"
-            className="w-12 text-center font-handwritten text-3xl font-bold bg-transparent outline-none transition-transform appearance-none text-slate-900"
-            value={section.measures}
-            onChange={(e) => onUpdate({ measures: parseInt(e.target.value) || 1 })}
-          />
+          <div className="min-w-[2rem] text-center font-handwritten text-4xl font-bold text-slate-900 select-none">
+            {section.measures}
+          </div>
 
           <button 
             onClick={() => onUpdate({ measures: section.measures + 1 })}
-            className="no-print opacity-0 group-hover:opacity-100 p-1 hover:bg-slate-100 rounded-full text-slate-300 hover:text-slate-600 transition-all"
+            className="no-print p-1 hover:bg-slate-100 rounded-full text-slate-300 hover:text-blue-600 transition-all"
           >
-            <ChevronRight size={14} />
+            <ChevronRight size={18} />
           </button>
         </div>
       </div>
@@ -118,12 +115,12 @@ const SectionCard: React.FC<SectionCardProps> = ({ section, onUpdate, onRemove, 
         />
       </div>
 
-      <div className="no-print absolute bottom-0 left-0 right-0 flex justify-between px-1 pb-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="no-print absolute bottom-0 left-0 right-0 flex justify-between px-1 pb-0.5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
          {onMove && (
-           <>
+           <div className="flex justify-between w-full pointer-events-auto">
              <button onClick={() => onMove('left')} className="p-0.5 hover:bg-slate-200 rounded text-slate-400"><ChevronLeft size={10}/></button>
              <button onClick={() => onMove('right')} className="p-0.5 hover:bg-slate-200 rounded text-slate-400"><ChevronRight size={10}/></button>
-           </>
+           </div>
          )}
       </div>
     </div>
