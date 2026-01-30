@@ -7,21 +7,14 @@ import StructureGrid from './components/StructureGrid';
 
 const DEFAULT_CHART: SongChart = {
   id: '1',
-  title: 'Exemplo de Música',
-  artist: 'Sua Banda',
+  title: 'Nome da Música',
+  artist: 'Nome do Artista',
   tempo: 120,
   timeSignature: '4/4',
-  feel: 'Straight',
-  genre: 'Rock',
+  feel: 'GROOVE',
+  genre: 'Gênero',
   sections: [
-    { id: '1', type: SectionType.INTRO, measures: 4, notation: 'Am | G | F | E7', cues: 'Só bateria' },
-    { id: '2', type: SectionType.INTRO, measures: 4, notation: 'Am | G | F | E7', cues: 'Entra Banda' },
-    { id: '3', type: SectionType.VERSO_1, measures: 8, notation: 'Am | Dm | G | C', cues: '' },
-    { id: '4', type: SectionType.PRE_REFRÃO, measures: 4, notation: 'F | G | F | G', cues: 'Crescendo' },
-    { id: '5', type: SectionType.REFRÃO, measures: 8, notation: 'C | G | Am | F', cues: 'Forte' },
-    { id: '6', type: SectionType.PONTE, measures: 8, notation: 'Dm | Am | Dm | E7', cues: 'Suave' },
-    { id: '7', type: SectionType.REFRÃO_FINAL, measures: 8, notation: 'C | G | Am | F', cues: 'Dobra' },
-    { id: '8', type: SectionType.OUTRO_FINAL, measures: 4, notation: 'C | G | Am | F', cues: 'Fade out' },
+    { id: '1', type: SectionType.INTRO, measures: 4, notation: 'Am | G | F | E7', cues: 'Só bateria' }
   ],
 };
 
@@ -35,7 +28,7 @@ export default function App() {
     localStorage.setItem('bandchart_last', JSON.stringify(chart));
     // Define o título da página para que o PDF seja salvo com este nome
     if (chart.title) {
-      document.title = `${chart.title} - ${chart.artist} - Mapa Musical`;
+      document.title = `${chart.title} - ${chart.artist} - Estúdio de Ensaio`;
     }
   }, [chart]);
 
@@ -127,7 +120,7 @@ export default function App() {
             <Music className="w-5 h-5 text-white" />
           </div>
           <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-            Music Practice Studio
+            Estúdio de Ensaio
           </h1>
         </div>
         <div className="flex items-center gap-4">

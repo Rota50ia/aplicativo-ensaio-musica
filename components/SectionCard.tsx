@@ -34,7 +34,7 @@ const SectionCard: React.FC<SectionCardProps> = ({ section, onUpdate, onRemove, 
   const colorClass = SECTION_COLORS[section.type] || 'border-t-slate-200';
 
   return (
-    <div className={`group relative flex flex-col border border-slate-200 border-t-4 rounded-lg shadow-sm hover:shadow-md transition-all min-h-[26rem] bg-white overflow-hidden ${colorClass}`}>
+    <div className={`group relative flex flex-col border border-slate-200 border-t-4 rounded-lg shadow-sm hover:shadow-md transition-all min-h-[19rem] bg-white overflow-hidden ${colorClass}`}>
       {/* Header do Card */}
       <div className="flex-none p-2 border-b border-slate-100 flex items-center justify-between gap-1">
         <div className="flex items-center gap-1 flex-1">
@@ -83,10 +83,10 @@ const SectionCard: React.FC<SectionCardProps> = ({ section, onUpdate, onRemove, 
       )}
 
       {/* Espaço para Harmonia */}
-      <div className="flex-none p-3 border-b border-slate-100 bg-white">
-        <div className="flex items-center gap-2 mb-2 opacity-60">
-          <Music2 size={12} className="text-blue-600" />
-          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Harmonia</span>
+      <div className="flex-none p-2 border-b border-slate-100 bg-white">
+        <div className="flex items-center gap-2 mb-1 opacity-60">
+          <Music2 size={10} className="text-blue-600" />
+          <span className="text-[9px] font-bold uppercase tracking-wider text-slate-500">Harmonia</span>
         </div>
         
         <div className="relative rounded bg-slate-100 overflow-hidden shadow-inner border border-slate-200/50">
@@ -94,34 +94,34 @@ const SectionCard: React.FC<SectionCardProps> = ({ section, onUpdate, onRemove, 
             className="absolute inset-0 pointer-events-none opacity-10"
             style={{
               backgroundImage: 'linear-gradient(#000 1px, transparent 1px)',
-              backgroundSize: '100% 1.25rem',
-              marginTop: '0.6rem'
+              backgroundSize: '100% 1rem',
+              marginTop: '0.4rem'
             }}
           />
           <textarea 
-            className="relative w-full h-24 bg-transparent resize-none outline-none font-mono text-xs font-bold text-black leading-[1.25rem] placeholder:text-slate-400 p-2 z-10"
+            className="relative w-full h-16 bg-transparent resize-none outline-none font-mono text-xs font-bold text-black leading-[1rem] placeholder:text-slate-400 p-1.5 z-10"
             value={section.notation || ''}
             onChange={(e) => onUpdate({ notation: e.target.value })}
-            placeholder="[Am7 | D7 | G7M]"
-            rows={4}
+            placeholder="[Am7 | D7]"
+            rows={3}
             spellCheck={false}
           />
         </div>
       </div>
 
-      {/* Corpo: Número de Compassos */}
-      <div className="flex-1 flex flex-col items-center justify-center relative py-4 bg-white">
+      {/* Corpo: Número de Compassos (Reduzido em 30% no espaço vertical) */}
+      <div className="flex-1 flex flex-col items-center justify-center relative py-2 bg-white">
         <div className="flex items-center">
           <button 
             onClick={() => onUpdate({ measures: Math.max(1, section.measures - 1) })}
             className="no-print opacity-0 group-hover:opacity-100 p-2 hover:bg-slate-100 rounded-full text-slate-300 hover:text-slate-600 transition-all"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={18} />
           </button>
           
           <input 
             type="number"
-            className="w-20 text-center font-handwritten text-6xl font-bold bg-transparent outline-none focus:scale-110 transition-transform appearance-none text-black"
+            className="w-16 text-center font-handwritten text-4xl font-bold bg-transparent outline-none focus:scale-110 transition-transform appearance-none text-black"
             value={section.measures}
             onChange={(e) => onUpdate({ measures: parseInt(e.target.value) || 1 })}
           />
@@ -130,16 +130,15 @@ const SectionCard: React.FC<SectionCardProps> = ({ section, onUpdate, onRemove, 
             onClick={() => onUpdate({ measures: section.measures + 1 })}
             className="no-print opacity-0 group-hover:opacity-100 p-2 hover:bg-slate-100 rounded-full text-slate-300 hover:text-slate-600 transition-all"
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={18} />
           </button>
         </div>
-        <span className="text-[10px] uppercase font-bold text-slate-400 tracking-tighter mt-1">Compassos</span>
       </div>
 
       {/* Footer: Dicas / Deixas */}
-      <div className="flex-none p-3 bg-slate-100 border-t border-slate-200 min-h-[70px]">
+      <div className="flex-none p-2 bg-slate-100 border-t border-slate-200 min-h-[50px]">
         <textarea 
-          className="w-full h-full bg-transparent resize-none outline-none font-handwritten text-sm font-bold text-black leading-tight placeholder:text-slate-400 italic"
+          className="w-full h-full bg-transparent resize-none outline-none font-handwritten text-[13px] font-bold text-black leading-tight placeholder:text-slate-400 italic"
           value={section.cues}
           onChange={(e) => onUpdate({ cues: e.target.value })}
           placeholder="Dicas ou deixas..."

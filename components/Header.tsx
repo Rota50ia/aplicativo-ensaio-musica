@@ -8,17 +8,18 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ chart, onUpdate }) => {
-  const inputBaseClass = "w-full bg-slate-100 text-black font-handwritten p-3 rounded-sm outline-none focus:ring-2 focus:ring-blue-500/20 transition-all border-none";
-  const labelClass = "text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1.5 block px-1";
+  // Alterado text-black para text-slate-500 conforme solicitado ("letras em cinza")
+  const inputBaseClass = "w-full bg-slate-100 text-slate-500 font-handwritten p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-500/20 transition-all border-none";
+  const labelClass = "text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 block px-1";
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-y-6 md:gap-x-8">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
       {/* Coluna Esquerda: Título e Artista */}
-      <div className="lg:col-span-5 space-y-5">
+      <div className="lg:col-span-6 space-y-6">
         <div>
           <label className={labelClass}>Nome da Música</label>
           <input 
-            className={`${inputBaseClass} text-3xl font-bold`}
+            className={`${inputBaseClass} text-xl font-bold`}
             value={chart.title}
             onChange={(e) => onUpdate('title', e.target.value)}
             placeholder="Exemplo de Música"
@@ -27,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({ chart, onUpdate }) => {
         <div>
           <label className={labelClass}>Banda / Artista</label>
           <input 
-            className={`${inputBaseClass} text-xl`}
+            className={`${inputBaseClass} text-base`}
             value={chart.artist}
             onChange={(e) => onUpdate('artist', e.target.value)}
             placeholder="Sua Banda"
@@ -36,12 +37,12 @@ const Header: React.FC<HeaderProps> = ({ chart, onUpdate }) => {
       </div>
 
       {/* Coluna Direita: Metadados Técnicos */}
-      <div className="lg:col-span-7 grid grid-cols-2 gap-4 h-fit">
+      <div className="lg:col-span-6 grid grid-cols-2 gap-4 h-fit">
         <div>
           <label className={labelClass}>Fórmula Compasso</label>
           <div className="relative">
             <select 
-              className={`${inputBaseClass} text-xl appearance-none cursor-pointer`}
+              className={`${inputBaseClass} text-base appearance-none cursor-pointer`}
               value={chart.timeSignature}
               onChange={(e) => onUpdate('timeSignature', e.target.value)}
             >
@@ -61,7 +62,7 @@ const Header: React.FC<HeaderProps> = ({ chart, onUpdate }) => {
           <label className={labelClass}>Tempo (BPM)</label>
           <input 
             type="number"
-            className={`${inputBaseClass} text-xl`}
+            className={`${inputBaseClass} text-base`}
             value={chart.tempo}
             onChange={(e) => onUpdate('tempo', parseInt(e.target.value) || 0)}
           />
@@ -70,7 +71,7 @@ const Header: React.FC<HeaderProps> = ({ chart, onUpdate }) => {
         <div>
           <label className={labelClass}>Feel / Levada</label>
           <input 
-            className={`${inputBaseClass} text-xl uppercase`}
+            className={`${inputBaseClass} text-base uppercase`}
             value={chart.feel}
             onChange={(e) => onUpdate('feel', e.target.value)}
             placeholder="STRAIGHT"
@@ -80,7 +81,7 @@ const Header: React.FC<HeaderProps> = ({ chart, onUpdate }) => {
         <div>
           <label className={labelClass}>Gênero</label>
           <input 
-            className={`${inputBaseClass} text-xl`}
+            className={`${inputBaseClass} text-base`}
             value={chart.genre}
             onChange={(e) => onUpdate('genre', e.target.value)}
             placeholder="Rock"
