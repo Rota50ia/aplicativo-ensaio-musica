@@ -36,8 +36,8 @@ const StructureGrid: React.FC<StructureGridProps> = ({ sections, onUpdate, onRem
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-      {sections.map((section, index) => (
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+      {sections.map((section) => (
         <div 
           key={section.id} 
           draggable="true"
@@ -56,9 +56,8 @@ const StructureGrid: React.FC<StructureGridProps> = ({ sections, onUpdate, onRem
         </div>
       ))}
       {sections.length === 0 && (
-        <div className="col-span-full py-16 text-center border-2 border-dashed border-slate-200 rounded-xl bg-slate-50 text-slate-400">
-          <p className="font-handwritten text-xl">Estrutura vazia.</p>
-          <p className="text-sm">Clique em "Adicionar Seção" para começar o mapa da sua música.</p>
+        <div className="col-span-full py-12 text-center border border-dashed border-slate-200 rounded-lg bg-slate-50 text-slate-400">
+          <p className="font-handwritten text-lg">Estrutura vazia.</p>
         </div>
       )}
     </div>

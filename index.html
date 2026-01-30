@@ -14,24 +14,29 @@
         .font-handwritten { font-family: 'Kalam', cursive; }
         
         @media print {
+            @page {
+                margin: 1cm;
+                size: A4;
+            }
             .no-print { display: none !important; }
             body { background: white !important; padding: 0 !important; margin: 0 !important; }
             .bg-slate-50 { background: white !important; }
             
-            /* Garante que as cores de fundo e bordas apareçam no PDF */
             * { 
                 -webkit-print-color-adjust: exact !important; 
                 print-color-adjust: exact !important; 
             }
             
-            /* Remove sombras para um PDF mais limpo */
             .shadow-xl, .shadow-md, .shadow-sm { 
                 box-shadow: none !important; 
                 border: 1px solid #e2e8f0 !important;
             }
 
             main { margin-top: 0 !important; padding: 0 !important; }
-            .max-w-7xl { max-width: 100% !important; }
+            .max-w-7xl { max-width: 100% !important; width: 100% !important; }
+            .p-8 { padding: 0.5rem !important; }
+            .mt-12 { margin-top: 1.5rem !important; }
+            .mb-8 { margin-bottom: 1rem !important; }
         }
     </style>
 <script type="importmap">
