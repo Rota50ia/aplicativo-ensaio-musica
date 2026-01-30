@@ -27,32 +27,57 @@ const SECTION_COLORS: Record<SectionType, string> = {
   [SectionType.INTERLUDIO]: 'border-t-indigo-400 bg-indigo-50/30',
   [SectionType.REFRÃO_FINAL]: 'border-t-rose-600 bg-rose-50/30',
   [SectionType.OUTRO_FINAL]: 'border-t-slate-800 bg-slate-200/50',
-  [SectionType.CUSTOM]: 'border-t-purple-400 bg-purple-50/30',
+  [SectionType.CUSTOM]: 'border-t-purple-500 bg-purple-50/30',
 };
 
 const SectionCard: React.FC<SectionCardProps> = ({ section, onUpdate, onRemove, onMove, onDuplicate }) => {
   const colorClass = SECTION_COLORS[section.type] || 'border-t-slate-200';
+  const isCustom = section.type === SectionType.CUSTOM;
 
   return (
     <div className={`group relative flex flex-col border border-slate-200 border-t-[2px] rounded shadow-sm transition-all min-h-[9rem] bg-white overflow-hidden ${colorClass}`}>
       {/* Header do Card */}
       <div className="flex-none px-1.5 py-0.5 border-b border-slate-100 flex items-center justify-between gap-1">
-        <div className="flex items-center gap-1 flex-1">
-           <div className="no-print cursor-grab active:cursor-grabbing p-0.5 text-slate-300 hover:text-slate-500 transition-colors">
+        <div className="flex items-center gap-1 flex-1 overflow-hidden">
+           <div className="no-print cursor-grab active:cursor-grabbing p-0.5 text-slate-300 hover:text-slate-500 transition-colors shrink-0">
              <GripVertical size={10} />
            </div>
-           <select 
-              className="bg-transparent font-bold text-[10px] uppercase tracking-tighter outline-none cursor-pointer hover:text-blue-600 transition-colors flex-1 appearance-none"
-              value={section.type}
-              onChange={(e) => onUpdate({ type: e.target.value as SectionType })}
-            >
-              {Object.values(SectionType).map(type => (
-                <option key={type} value={type}>{type}</option>
-              ))}
-            </select>
+           
+           <div className="flex flex-col flex-1 min-w-0">
+             {isCustom ? (
+               <div className="flex items-center gap-1 w-full">
+                 <input 
+                   className="bg-transparent font-bold text-[10px] uppercase tracking-tighter outline-none border-b border-purple-200 focus:border-purple-500 w-full placeholder:text-purple-200 placeholder:italic px-0.5 py-0"
+                   value={section.customLabel || ''}
+                   onChange={(e) => onUpdate({ customLabel: e.target.value })}
+                   placeholder="NOME..."
+                   autoFocus
+                 />
+                 <select 
+                    className="w-4 bg-transparent text-slate-200 hover:text-blue-600 cursor-pointer appearance-none outline-none border-none text-[8px]"
+                    value={section.type}
+                    onChange={(e) => onUpdate({ type: e.target.value as SectionType })}
+                  >
+                    {Object.values(SectionType).map(type => (
+                      <option key={type} value={type}>{type}</option>
+                    ))}
+                  </select>
+               </div>
+             ) : (
+               <select 
+                  className="bg-transparent font-bold text-[10px] uppercase tracking-tighter outline-none cursor-pointer hover:text-blue-600 transition-colors w-full appearance-none truncate"
+                  value={section.type}
+                  onChange={(e) => onUpdate({ type: e.target.value as SectionType })}
+                >
+                  {Object.values(SectionType).map(type => (
+                    <option key={type} value={type}>{type}</option>
+                  ))}
+                </select>
+             )}
+           </div>
         </div>
 
-        <div className="flex items-center gap-0.5 no-print opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="flex items-center gap-0.5 no-print opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
           <button onClick={onDuplicate} title="Duplicar" className="p-0.5 hover:bg-slate-200 rounded text-slate-400 hover:text-slate-600">
             <Copy size={10} />
           </button>
@@ -62,7 +87,7 @@ const SectionCard: React.FC<SectionCardProps> = ({ section, onUpdate, onRemove, 
         </div>
       </div>
 
-      {/* Espaço para Harmonia - Fonte aumentada para 12px (text-xs) */}
+      {/* Espaço para Harmonia */}
       <div className="flex-none p-1 border-b border-slate-50 bg-white">
         <div className="flex items-center gap-1 mb-0.5 opacity-60">
           <Music2 size={8} className="text-blue-600" />

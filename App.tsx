@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { Plus, Download, Music, Trash } from 'lucide-react';
-import { SongChart, ChartSection, SectionType } from './types';
+import { SongChart, ChartSection, SectionType, ChartLink } from './types';
 import Header from './components/Header';
 import StructureGrid from './components/StructureGrid';
+import ReferenceLinks from './components/ReferenceLinks';
 
 const DEFAULT_CHART: SongChart = {
   id: '1',
@@ -13,6 +14,7 @@ const DEFAULT_CHART: SongChart = {
   timeSignature: '4/4',
   feel: 'GROOVE',
   genre: 'Gênero',
+  links: [],
   sections: [
     { id: '1', type: SectionType.INTRO, measures: 4, notation: 'Am | G | F | E7', cues: 'Só bateria' }
   ],
@@ -26,13 +28,35 @@ export default function App() {
 
   useEffect(() => {
     localStorage.setItem('bandchart_last', JSON.stringify(chart));
-    if (chart.title) {
-      document.title = `${chart.title} - ${chart.artist} - Estúdio de Ensaio`;
-    }
+    // Define o título técnico da aba do navegador como solicitado
+    document.title = "Estúdio de Ensaio";
   }, [chart]);
 
-  const updateMetadata = (key: keyof Omit<SongChart, 'sections' | 'id'>, value: string | number) => {
+  const updateMetadata = (key: keyof Omit<SongChart, 'sections' | 'id' | 'links'>, value: string | number) => {
     setChart(prev => ({ ...prev, [key]: value }));
+  };
+
+  const addLink = () => {
+    const newLink: ChartLink = {
+      id: Math.random().toString(36).substr(2, 9),
+      label: 'Referência',
+      url: ''
+    };
+    setChart(prev => ({ ...prev, links: [...(prev.links || []), newLink] }));
+  };
+
+  const updateLink = (id: string, updates: Partial<ChartLink>) => {
+    setChart(prev => ({
+      ...prev,
+      links: (prev.links || []).map(l => l.id === id ? { ...l, ...updates } : l)
+    }));
+  };
+
+  const removeLink = (id: string) => {
+    setChart(prev => ({
+      ...prev,
+      links: (prev.links || []).filter(l => l.id !== id)
+    }));
   };
 
   const addSection = () => {
@@ -107,7 +131,7 @@ export default function App() {
 
   const clearChart = () => {
     if (confirm('Tem certeza que deseja limpar todo o mapa?')) {
-      setChart(prev => ({ ...prev, sections: [] }));
+      setChart(prev => ({ ...prev, title: '', artist: '', sections: [], links: [] }));
     }
   };
 
@@ -128,7 +152,7 @@ export default function App() {
             className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold bg-blue-600 text-white hover:bg-blue-700 rounded transition-colors shadow-sm"
           >
             <Download size={14} />
-            Exportar
+            Exportar PDF
           </button>
         </div>
       </nav>
@@ -138,6 +162,13 @@ export default function App() {
           <Header 
             chart={chart} 
             onUpdate={updateMetadata} 
+          />
+
+          <ReferenceLinks 
+            links={chart.links || []}
+            onAdd={addLink}
+            onUpdate={updateLink}
+            onRemove={removeLink}
           />
 
           <div className="mt-2">
@@ -177,7 +208,7 @@ export default function App() {
       </main>
 
       <footer className="mt-4 text-center text-slate-300 text-[9px] no-print">
-        Estúdio de Ensaio &bull; Mapeamento de Estruturas
+        Estúdio de Ensaio • Ferramenta para Músicos by Edilson Morais . 2026
       </footer>
     </div>
   );

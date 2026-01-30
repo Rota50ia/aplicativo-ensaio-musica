@@ -18,6 +18,12 @@ export enum SectionType {
   CUSTOM = 'Customizado'
 }
 
+export interface ChartLink {
+  id: string;
+  label: string;
+  url: string;
+}
+
 export interface ChartSection {
   id: string;
   type: SectionType;
@@ -36,4 +42,5 @@ export interface SongChart {
   feel: string;
   genre: string;
   sections: ChartSection[];
+  links?: ChartLink[];
 }
