@@ -8,16 +8,16 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ chart, onUpdate }) => {
-  const inputBaseClass = "w-full bg-slate-100 text-slate-500 font-handwritten px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500/20 transition-all border-none text-sm";
-  const labelClass = "text-[10px] font-bold text-slate-400 uppercase tracking-tighter mb-1 block px-1";
+  const inputBaseClass = "w-full bg-slate-50 text-slate-600 font-handwritten px-2 py-1 rounded outline-none focus:ring-1 focus:ring-blue-500/20 transition-all border border-transparent hover:border-slate-200 text-xs";
+  const labelClass = "text-[9px] font-black text-slate-400 uppercase tracking-tighter mb-0.5 block px-0.5";
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-3 border-b border-slate-100 pb-6">
+    <div className="grid grid-cols-2 md:grid-cols-12 gap-2 border-b border-slate-100 pb-3 mb-2">
       {/* Nome da Música */}
-      <div className="col-span-2">
-        <label className={labelClass}>Nome da Música</label>
+      <div className="col-span-2 md:col-span-4">
+        <label className={labelClass}>Música</label>
         <input 
-          className={`${inputBaseClass} text-lg font-bold py-1`}
+          className={`${inputBaseClass} text-sm font-bold`}
           value={chart.title}
           onChange={(e) => onUpdate('title', e.target.value)}
           placeholder="Nome da Música"
@@ -25,10 +25,10 @@ const Header: React.FC<HeaderProps> = ({ chart, onUpdate }) => {
       </div>
 
       {/* Artista */}
-      <div className="col-span-2">
-        <label className={labelClass}>Banda / Artista</label>
+      <div className="col-span-2 md:col-span-3">
+        <label className={labelClass}>Artista</label>
         <input 
-          className={`${inputBaseClass} text-base py-1`}
+          className={inputBaseClass}
           value={chart.artist}
           onChange={(e) => onUpdate('artist', e.target.value)}
           placeholder="Nome do Artista"
@@ -36,27 +36,24 @@ const Header: React.FC<HeaderProps> = ({ chart, onUpdate }) => {
       </div>
 
       {/* Fórmula de Compasso */}
-      <div className="col-span-1">
-        <label className={labelClass}>Fórmula Compasso</label>
-        <div className="relative">
-          <select 
-            className={`${inputBaseClass} appearance-none cursor-pointer`}
-            value={chart.timeSignature}
-            onChange={(e) => onUpdate('timeSignature', e.target.value)}
-          >
-            <option value="4/4">4/4</option>
-            <option value="3/4">3/4</option>
-            <option value="2/4">2/4</option>
-            <option value="6/8">6/8</option>
-            <option value="12/8">12/8</option>
-          </select>
-          <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none opacity-20 text-[10px]">▼</div>
-        </div>
+      <div className="col-span-1 md:col-span-1">
+        <label className={labelClass}>Compasso</label>
+        <select 
+          className={`${inputBaseClass} appearance-none cursor-pointer`}
+          value={chart.timeSignature}
+          onChange={(e) => onUpdate('timeSignature', e.target.value)}
+        >
+          <option value="4/4">4/4</option>
+          <option value="3/4">3/4</option>
+          <option value="2/4">2/4</option>
+          <option value="6/8">6/8</option>
+          <option value="12/8">12/8</option>
+        </select>
       </div>
 
       {/* Tempo */}
-      <div className="col-span-1">
-        <label className={labelClass}>Tempo (BPM)</label>
+      <div className="col-span-1 md:col-span-1">
+        <label className={labelClass}>BPM</label>
         <input 
           type="number"
           className={inputBaseClass}
@@ -66,8 +63,8 @@ const Header: React.FC<HeaderProps> = ({ chart, onUpdate }) => {
       </div>
 
       {/* Feel */}
-      <div className="col-span-1">
-        <label className={labelClass}>Feel / Levada</label>
+      <div className="col-span-1 md:col-span-1">
+        <label className={labelClass}>Feel</label>
         <input 
           className={`${inputBaseClass} uppercase`}
           value={chart.feel}
@@ -77,7 +74,7 @@ const Header: React.FC<HeaderProps> = ({ chart, onUpdate }) => {
       </div>
 
       {/* Gênero */}
-      <div className="col-span-1">
+      <div className="col-span-1 md:col-span-2">
         <label className={labelClass}>Gênero</label>
         <input 
           className={inputBaseClass}

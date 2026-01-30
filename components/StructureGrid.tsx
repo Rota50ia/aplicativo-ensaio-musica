@@ -35,6 +35,10 @@ const StructureGrid: React.FC<StructureGridProps> = ({ sections, onUpdate, onRem
     setDraggedId(null);
   };
 
+  const handleDragEnd = () => {
+    setDraggedId(null);
+  };
+
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
       {sections.map((section) => (
@@ -42,9 +46,10 @@ const StructureGrid: React.FC<StructureGridProps> = ({ sections, onUpdate, onRem
           key={section.id} 
           draggable="true"
           onDragStart={(e) => handleDragStart(e, section.id)}
+          onDragEnd={handleDragEnd}
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, section.id)}
-          className={`transition-all ${draggedId === section.id ? 'opacity-30 scale-95' : 'opacity-100'}`}
+          className={`transition-all duration-200 ${draggedId === section.id ? 'opacity-20 scale-95 pointer-events-none' : 'opacity-100'}`}
         >
           <SectionCard 
             section={section}

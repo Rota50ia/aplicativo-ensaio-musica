@@ -112,53 +112,53 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen pb-10 bg-slate-50">
-      <nav className="no-print sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 px-6 py-2 flex items-center justify-between shadow-sm">
+    <div className="min-h-screen pb-6 bg-slate-50">
+      <nav className="no-print sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 px-6 py-1.5 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-2">
-          <div className="bg-blue-600 p-1.5 rounded-md">
-            <Music className="w-4 h-4 text-white" />
+          <div className="bg-blue-600 p-1 rounded">
+            <Music className="w-3.5 h-3.5 text-white" />
           </div>
-          <h1 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+          <h1 className="text-base font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
             Estúdio de Ensaio
           </h1>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <button 
             onClick={handleExportPDF}
-            className="flex items-center gap-2 px-3 py-1 text-sm font-medium bg-blue-600 text-white hover:bg-blue-700 rounded transition-colors shadow-sm"
+            className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold bg-blue-600 text-white hover:bg-blue-700 rounded transition-colors shadow-sm"
           >
-            <Download size={16} />
+            <Download size={14} />
             Exportar
           </button>
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto mt-4 px-2 md:px-4">
-        <div className="bg-white p-6 rounded-xl shadow-md border border-slate-100 min-h-[calc(100vh-8rem)] print:shadow-none print:border-none print:p-0">
+      <main className="max-w-7xl mx-auto mt-2 px-2 md:px-4">
+        <div className="bg-white p-4 rounded-lg shadow-sm border border-slate-100 print:shadow-none print:border-none print:p-0">
           <Header 
             chart={chart} 
             onUpdate={updateMetadata} 
           />
 
-          <div className="mt-6">
-            <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-2">
-              <h2 className="text-sm font-black text-slate-800 uppercase tracking-widest flex items-center gap-2">
-                <span className="w-1.5 h-4 bg-blue-600 rounded-full"></span>
-                Estrutura
+          <div className="mt-2">
+            <div className="flex items-center justify-between mb-2 border-b border-slate-50 pb-1">
+              <h2 className="text-[10px] font-black text-slate-500 uppercase tracking-widest flex items-center gap-1.5">
+                <span className="w-1 h-3 bg-blue-600 rounded-full"></span>
+                Estrutura Musical
               </h2>
               <div className="flex gap-2 no-print items-center">
                 <button 
                   onClick={clearChart}
-                  className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded transition-all"
+                  className="p-1 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded transition-all"
                   title="Limpar tudo"
                 >
-                  <Trash size={16} />
+                  <Trash size={14} />
                 </button>
                 <button 
                   onClick={addSection}
-                  className="flex items-center gap-2 px-4 py-1.5 bg-slate-900 text-white rounded hover:bg-black transition-all active:scale-95 shadow font-bold text-xs"
+                  className="flex items-center gap-1.5 px-3 py-1 bg-slate-900 text-white rounded hover:bg-black transition-all active:scale-95 shadow font-bold text-[10px]"
                 >
-                  <Plus size={16} />
+                  <Plus size={14} />
                   Adicionar Seção
                 </button>
               </div>
@@ -176,8 +176,8 @@ export default function App() {
         </div>
       </main>
 
-      <footer className="mt-8 text-center text-slate-300 text-[10px] no-print">
-        Estúdio de Ensaio &bull; Salvo Automaticamente
+      <footer className="mt-4 text-center text-slate-300 text-[9px] no-print">
+        Estúdio de Ensaio &bull; Mapeamento de Estruturas
       </footer>
     </div>
   );
